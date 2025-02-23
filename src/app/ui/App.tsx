@@ -2,7 +2,8 @@ import { FC } from 'react';
 import { CssBaseline, ThemeProvider } from '@mui/material';
 
 import { createTheme, THEMES } from '@shared/theme';
-import { useDarkMode } from '@shared/lib';
+import { useDarkMode } from '@shared/utils';
+
 // import reactLogo from '@assets/react.svg';
 // import viteLogo from '/vite.svg';
 
