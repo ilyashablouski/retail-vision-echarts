@@ -3,6 +3,7 @@ import { CssBaseline, ThemeProvider } from '@mui/material';
 
 import { createTheme, THEMES } from '@shared/theme';
 import { useDarkMode } from '@shared/utils';
+import HomePage from '@pages/home';
 
 // import reactLogo from '@assets/react.svg';
 // import viteLogo from '/vite.svg';
@@ -22,7 +23,8 @@ const App: FC = () => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      HomePage
+      
+      <HomePage />
     </ThemeProvider>
   );
 };
