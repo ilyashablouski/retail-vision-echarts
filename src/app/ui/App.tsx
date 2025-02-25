@@ -14,9 +14,11 @@ const createMuiTheme = (theme: THEMES) =>
     locale: 'en',
   });
 
+/** For real api service
+ * const apiChartsService = new MockChartsService();
+ * */
+
 const chartsService = new MockChartsService();
-//For real api service
-// const apiChartsService = new MockChartsService();
 
 const App: FC = () => {
   const { isDarkMode } = useDarkMode();

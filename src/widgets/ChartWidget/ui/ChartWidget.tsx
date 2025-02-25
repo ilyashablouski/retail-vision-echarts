@@ -2,13 +2,11 @@ import { useState, MouseEvent, FC } from 'react';
 
 import ChartWrapper from '@shared/ui';
 import { ToggleButton, ToggleButtonGroup } from '@mui/material';
+import { Chart } from '@shared/model';
 
 const CHART_TYPES = ['line', 'bar', 'pie'] as const;
 
-interface ChartWidgetProps {
-  labels: string[];
-  data: number[];
-}
+type ChartWidgetProps = Chart;
 
 export const ChartWidget: FC<ChartWidgetProps> = ({ labels, data }) => {
   const [chartType, setChartType] = useState<(typeof CHART_TYPES)[number]>('pie');
