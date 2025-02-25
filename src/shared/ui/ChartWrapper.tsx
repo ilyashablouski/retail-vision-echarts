@@ -1,22 +1,27 @@
-import { FC } from 'react';
-import ReactECharts from 'echarts-for-react';
-// import EChartsReact from 'echarts-for-react';
+import * as echarts from 'echarts';
+import { CSSProperties, FC, useEffect, useRef } from 'react';
 import { ECBasicOption } from 'echarts/types/dist/shared';
 
 interface ChartWrapperProps {
   options: ECBasicOption;
+  style?: CSSProperties;
 }
 
-const ChartWrapper: FC<ChartWrapperProps> = ({ options }) => {
-  // const chartRef = useRef<EChartsReact>(null);
+export const ChartWrapper: FC<ChartWrapperProps> = ({ options, style }) => {
+  const chartRef = useRef<HTMLDivElement | null>(null);
 
-  // useEffect(() => {
-  //   if (chartRef.current) {
-  //     chartRef.current.getEchartsInstance().setOption(options);
-  //   }
-  // }, [options]);
+  useEffect(() => {
+    if (chartRef.current) {
+      const chart = echarts.init(chartRef.current);
+      chart.setOption(options);
 
-  return <ReactECharts option={options} style={{ height: '400px', width: '100%' }} />;
+      return () => {
+        chart.dispose();
+      };
+    }
+  }, [options]);
+
+  return <div ref={chartRef} style={style ? style : { height: '400px', width: '100%' }} />;
 };
 
 export default ChartWrapper;

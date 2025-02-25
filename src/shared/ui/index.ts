@@ -1,1 +1,1 @@
-export { default } from './ChartWrapper';
+export { default } from './ChartWrapper.tsx';
