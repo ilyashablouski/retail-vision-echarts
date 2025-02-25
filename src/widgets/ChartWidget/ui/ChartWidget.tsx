@@ -13,9 +13,6 @@ interface ChartWidgetProps {
 export const ChartWidget: FC<ChartWidgetProps> = ({ labels, data }) => {
   const [chartType, setChartType] = useState<(typeof CHART_TYPES)[number]>('pie');
 
-  // const labels = generateRandomLabels(10);
-  // const data = generateNormalDistributionData(50, 10, 10);
-
   const getOptions = () => {
     switch (chartType) {
       case 'line':
@@ -75,18 +72,6 @@ export const ChartWidget: FC<ChartWidgetProps> = ({ labels, data }) => {
       </div>
       <ChartWrapper options={getOptions()} />
     </>
-
-    // <div>
-    //   <div style={{ marginBottom: '20px' }}>
-    //     {CHART_TYPES.map((type) => (
-    //       <button key={type} onClick={() => setChartType(type)}>
-    //         {type.charAt(0).toUpperCase() + type.slice(1)}
-    //       </button>
-    //     ))}
-    //   </div>
-    //
-    //   <ChartWrapper options={getOptions()} />
-    // </div>
   );
 };
 

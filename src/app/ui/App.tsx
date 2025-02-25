@@ -5,9 +5,6 @@ import { createTheme, THEMES } from '@shared/theme';
 import { useDarkMode } from '@shared/utils';
 import HomePage from '@pages/home';
 
-// import reactLogo from '@assets/react.svg';
-// import viteLogo from '/vite.svg';
-
 const createMuiTheme = (theme: THEMES) =>
   createTheme({
     direction: 'ltr',
@@ -23,7 +20,7 @@ const App: FC = () => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      
+
       <HomePage />
     </ThemeProvider>
   );
