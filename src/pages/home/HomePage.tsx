@@ -24,9 +24,9 @@ export const HomePage: FC<HomePageProps> = ({ chartsService }) => {
 
       {charts.length > 0 && (
         <Grid container spacing={2}>
-          {charts.map(({ chartType, labels, data }, index) => (
+          {charts.map(({ chartType, chartLabels, chartData }, index) => (
             <Grid size={{ xs: 12, md: 6 }} key={index}>
-              <ChartWidget chartType={chartType} labels={labels} data={data} />
+              <ChartWidget chartType={chartType} chartLabels={chartLabels} chartData={chartData} />
             </Grid>
           ))}
         </Grid>

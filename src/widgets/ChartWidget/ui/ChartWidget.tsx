@@ -11,7 +11,7 @@ import { CHART_TYPES } from '@/shared/types/chartTypes';
 
 type ChartWidgetProps = Chart;
 
-export const ChartWidget: FC<ChartWidgetProps> = ({ chartType, labels, data }) => {
+export const ChartWidget: FC<ChartWidgetProps> = ({ chartType, chartLabels, chartData }) => {
   const [chartToggleType, setChartToggleType] = useState<ChartType>(chartType);
 
   const handleChartTypeChange = (_event: MouseEvent<HTMLElement>, newChartType: ChartType) => {
@@ -20,7 +20,7 @@ export const ChartWidget: FC<ChartWidgetProps> = ({ chartType, labels, data }) =
     }
   };
 
-  const chartOptions = getChartOptions(chartToggleType, labels, data);
+  const chartOptions = getChartOptions(chartToggleType, chartLabels, chartData);
 
   return (
     <>

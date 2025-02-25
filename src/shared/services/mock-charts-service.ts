@@ -9,18 +9,18 @@ export class MockChartsService implements ChartsService {
     this.charts = [
       {
         chartType: ChartType.Line,
-        labels: generateRandomLabels(5),
-        data: generateNormalDistributionData(50, 10, 5),
+        chartLabels: generateRandomLabels(5),
+        chartData: generateNormalDistributionData(50, 10, 5),
       },
       {
         chartType: ChartType.Bar,
-        labels: generateRandomLabels(10),
-        data: generateNormalDistributionData(50, 10, 10),
+        chartLabels: generateRandomLabels(10),
+        chartData: generateNormalDistributionData(50, 10, 10),
       },
       {
         chartType: ChartType.Pie,
-        labels: generateRandomLabels(20),
-        data: generateNormalDistributionData(50, 10, 20),
+        chartLabels: generateRandomLabels(20),
+        chartData: generateNormalDistributionData(50, 10, 20),
       },
     ];
   }

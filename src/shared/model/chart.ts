@@ -2,8 +2,8 @@ import { ChartType } from '@shared/types';
 
 export interface Chart {
   chartType: ChartType;
-  labels: string[];
-  data: number[];
+  chartLabels: string[];
+  chartData: number[];
 }
 
 export interface ChartsService {

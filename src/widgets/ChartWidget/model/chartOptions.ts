@@ -1,21 +1,25 @@
 import { ChartType } from '@shared/types';
 import { ECBasicOption } from 'echarts/types/dist/shared';
 
-export const getChartOptions = (chartType: ChartType, labels: string[], data: number[]): ECBasicOption => {
+export const getChartOptions = (
+  chartType: ChartType,
+  chartLabels: string[],
+  chartData: number[],
+): ECBasicOption => {
   switch (chartType) {
     case ChartType.Line:
       return {
         title: { text: 'Line Chart' },
-        xAxis: { type: 'category', data: labels },
+        xAxis: { type: 'category', data: chartLabels },
         yAxis: { type: 'value' },
-        series: [{ data, type: 'line' }],
+        series: [{ data: chartData, type: 'line' }],
       };
     case ChartType.Bar:
       return {
         title: { text: 'Bar Chart' },
-        xAxis: { type: 'category', data: labels },
+        xAxis: { type: 'category', data: chartLabels },
         yAxis: { type: 'value' },
-        series: [{ data, type: 'bar' }],
+        series: [{ data: chartData, type: 'bar' }],
       };
     case ChartType.Pie:
       return {
@@ -23,7 +27,7 @@ export const getChartOptions = (chartType: ChartType, labels: string[], data: nu
         series: [
           {
             type: 'pie',
-            data: labels.map((label, index) => ({ name: label, value: data[index] })),
+            data: chartLabels.map((label, index) => ({ name: label, value: chartData[index] })),
           },
         ],
       };
