@@ -1,15 +1,20 @@
-import { useState } from 'react';
+import { useState, MouseEvent, FC } from 'react';
 
-import { generateNormalDistributionData, generateRandomLabels } from '@shared/utils';
 import ChartWrapper from '@shared/ui';
+import { ToggleButton, ToggleButtonGroup } from '@mui/material';
 
 const CHART_TYPES = ['line', 'bar', 'pie'] as const;
 
-export const ChartWidget = () => {
-  const [chartType, setChartType] = useState<(typeof CHART_TYPES)[number]>('line');
+interface ChartWidgetProps {
+  labels: string[];
+  data: number[];
+}
 
-  const labels = generateRandomLabels(10);
-  const data = generateNormalDistributionData(50, 10, 10);
+export const ChartWidget: FC<ChartWidgetProps> = ({ labels, data }) => {
+  const [chartType, setChartType] = useState<(typeof CHART_TYPES)[number]>('pie');
+
+  // const labels = generateRandomLabels(10);
+  // const data = generateNormalDistributionData(50, 10, 10);
 
   const getOptions = () => {
     switch (chartType) {
@@ -42,17 +47,46 @@ export const ChartWidget = () => {
     }
   };
 
+  const handleChartTypeChange = (
+    _event: MouseEvent<HTMLElement>,
+    newChartType: (typeof CHART_TYPES)[number],
+  ) => {
+    if (newChartType !== null) {
+      setChartType(newChartType);
+    }
+  };
+
   return (
-    <div>
+    <>
       <div style={{ marginBottom: '20px' }}>
-        {CHART_TYPES.map((type) => (
-          <button key={type} onClick={() => setChartType(type)}>
-            {type.charAt(0).toUpperCase() + type.slice(1)}
-          </button>
-        ))}
+        <ToggleButtonGroup
+          value={chartType}
+          exclusive
+          onChange={handleChartTypeChange}
+          aria-label="chart type"
+          color="primary"
+        >
+          {CHART_TYPES.map((type) => (
+            <ToggleButton key={type} value={type} aria-label={type}>
+              {type.charAt(0).toUpperCase() + type.slice(1)}
+            </ToggleButton>
+          ))}
+        </ToggleButtonGroup>
       </div>
       <ChartWrapper options={getOptions()} />
-    </div>
+    </>
+
+    // <div>
+    //   <div style={{ marginBottom: '20px' }}>
+    //     {CHART_TYPES.map((type) => (
+    //       <button key={type} onClick={() => setChartType(type)}>
+    //         {type.charAt(0).toUpperCase() + type.slice(1)}
+    //       </button>
+    //     ))}
+    //   </div>
+    //
+    //   <ChartWrapper options={getOptions()} />
+    // </div>
   );
 };
 
