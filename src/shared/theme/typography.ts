@@ -9,7 +9,7 @@ const typography: TypographyOptions = {
   fontWeightBold: 700,
   fontWeightExtraBold: 900,
   h1: {
-    fontSize: '2rem',
+    fontSize: '2.5rem',
     fontWeight: 700,
     lineHeight: 1.17,
   },

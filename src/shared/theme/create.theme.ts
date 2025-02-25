@@ -179,6 +179,9 @@ const baseOptions: ThemeOptions = {
             };
           }
         },
+        gutterBottom: {
+          marginBottom: '0.5em',
+        },
       },
     },
     MuiSvgIcon: {
