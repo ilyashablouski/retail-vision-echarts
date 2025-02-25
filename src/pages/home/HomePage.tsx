@@ -22,13 +22,15 @@ export const HomePage: FC<HomePageProps> = ({ chartsService }) => {
         Data Visualization with ECharts
       </Typography>
 
-      <Grid container spacing={2}>
-        {charts.map(({ labels, data }, index) => (
-          <Grid size={{ xs: 12, md: 6 }}>
-            <ChartWidget key={index} labels={labels} data={data} />
-          </Grid>
-        ))}
-      </Grid>
+      {charts.length > 0 && (
+        <Grid container spacing={2}>
+          {charts.map(({ labels, data }, index) => (
+            <Grid size={{ xs: 12, md: 6 }}>
+              <ChartWidget key={index} labels={labels} data={data} />
+            </Grid>
+          ))}
+        </Grid>
+      )}
     </Container>
   );
 };
