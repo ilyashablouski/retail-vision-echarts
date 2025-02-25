@@ -1,4 +1,7 @@
+import { ChartType } from '@shared/types';
+
 export interface Chart {
+  chartType: ChartType;
   labels: string[];
   data: number[];
 }

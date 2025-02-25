@@ -1,61 +1,32 @@
 import { useState, MouseEvent, FC } from 'react';
+// import { ECBasicOption } from 'echarts/types/dist/shared';
 
 import ChartWrapper from '@shared/ui';
 import { ToggleButton, ToggleButtonGroup } from '@mui/material';
 import { Chart } from '@shared/model';
-
-const CHART_TYPES = ['line', 'bar', 'pie'] as const;
+import { stringToUpperCase } from '@shared/utils';
+import { ChartType } from '@shared/types';
+import { getChartOptions } from '@widgets/ChartWidget/model/chartOptions';
+import { CHART_TYPES } from '@/shared/types/chartTypes';
 
 type ChartWidgetProps = Chart;
 
-export const ChartWidget: FC<ChartWidgetProps> = ({ labels, data }) => {
-  const [chartType, setChartType] = useState<(typeof CHART_TYPES)[number]>('pie');
+export const ChartWidget: FC<ChartWidgetProps> = ({ chartType, labels, data }) => {
+  const [chartToggleType, setChartToggleType] = useState<ChartType>(chartType);
 
-  const getOptions = () => {
-    switch (chartType) {
-      case 'line':
-        return {
-          title: { text: 'Line Chart' },
-          xAxis: { type: 'category', data: labels },
-          yAxis: { type: 'value' },
-          series: [{ data, type: 'line' }],
-        };
-      case 'bar':
-        return {
-          title: { text: 'Bar Chart' },
-          xAxis: { type: 'category', data: labels },
-          yAxis: { type: 'value' },
-          series: [{ data, type: 'bar' }],
-        };
-      case 'pie':
-        return {
-          title: { text: 'Pie Chart' },
-          series: [
-            {
-              type: 'pie',
-              data: labels.map((label, index) => ({ name: label, value: data[index] })),
-            },
-          ],
-        };
-      default:
-        return {};
-    }
-  };
-
-  const handleChartTypeChange = (
-    _event: MouseEvent<HTMLElement>,
-    newChartType: (typeof CHART_TYPES)[number],
-  ) => {
+  const handleChartTypeChange = (_event: MouseEvent<HTMLElement>, newChartType: ChartType) => {
     if (newChartType !== null) {
-      setChartType(newChartType);
+      setChartToggleType(newChartType);
     }
   };
+
+  const chartOptions = getChartOptions(chartToggleType, labels, data);
 
   return (
     <>
       <div style={{ marginBottom: '20px' }}>
         <ToggleButtonGroup
-          value={chartType}
+          value={chartToggleType}
           exclusive
           onChange={handleChartTypeChange}
           aria-label="chart type"
@@ -63,12 +34,13 @@ export const ChartWidget: FC<ChartWidgetProps> = ({ labels, data }) => {
         >
           {CHART_TYPES.map((type) => (
             <ToggleButton key={type} value={type} aria-label={type}>
-              {type.charAt(0).toUpperCase() + type.slice(1)}
+              {stringToUpperCase(type)}
             </ToggleButton>
           ))}
         </ToggleButtonGroup>
       </div>
-      <ChartWrapper options={getOptions()} />
+
+      <ChartWrapper options={chartOptions} />
     </>
   );
 };
