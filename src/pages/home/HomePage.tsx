@@ -1,16 +1,21 @@
+import { FC, useEffect, useState } from 'react';
 import { Container, Typography } from '@mui/material';
 import Grid from '@mui/material/Grid2';
 
 import ChartWidget from '@widgets/ChartWidget';
-import { generateNormalDistributionData, generateRandomLabels } from '@shared/utils';
+import { Chart, ChartsService } from '@shared/model';
 
-const charts = [
-  { labels: generateRandomLabels(5), data: generateNormalDistributionData(50, 10, 5) },
-  { labels: generateRandomLabels(10), data: generateNormalDistributionData(50, 10, 10) },
-  { labels: generateRandomLabels(20), data: generateNormalDistributionData(50, 10, 20) },
-];
+interface HomePageProps {
+  chartsService: ChartsService;
+}
 
-export const HomePage = () => {
+export const HomePage: FC<HomePageProps> = ({ chartsService }) => {
+  const [charts, setCharts] = useState<Chart[]>([]);
+
+  useEffect(() => {
+    chartsService.getCharts().then((chartsData) => setCharts(chartsData));
+  }, [chartsService]);
+
   return (
     <Container maxWidth="xl" sx={{ my: 4 }}>
       <Typography variant="h1" gutterBottom>
