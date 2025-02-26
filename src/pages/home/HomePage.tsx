@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from 'react';
-import { Container, Typography, useTheme } from '@mui/material';
+import { Container, Typography } from '@mui/material';
 import Grid from '@mui/material/Grid2';
 
 import ChartWidget from '@widgets/ChartWidget';
@@ -11,14 +11,13 @@ interface HomePageProps {
 
 export const HomePage: FC<HomePageProps> = ({ chartsService }) => {
   const [charts, setCharts] = useState<Chart[]>([]);
-  const theme = useTheme();
 
   useEffect(() => {
     chartsService.getCharts().then((chartsData) => setCharts(chartsData));
   }, [chartsService]);
 
   return (
-    <Container maxWidth="xl" sx={{ my: 4 }}>
+    <Container maxWidth="xl" sx={{ my: 6 }}>
       <Typography variant="h1" gutterBottom>
         Data Visualization with ECharts
       </Typography>
@@ -26,7 +25,7 @@ export const HomePage: FC<HomePageProps> = ({ chartsService }) => {
       {charts.length > 0 && (
         <Grid container spacing={2}>
           {charts.map(({ chartType, chartLabels, chartData }, index) => (
-            <Grid size={{ xs: 12, md: 6 }} key={`${index}-${theme.palette.mode}`}>
+            <Grid size={{ xs: 12, md: 6 }} key={index}>
               <ChartWidget chartType={chartType} chartLabels={chartLabels} chartData={chartData} />
             </Grid>
           ))}

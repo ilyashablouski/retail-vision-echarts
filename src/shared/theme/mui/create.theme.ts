@@ -12,6 +12,7 @@ import { Shadows } from '@mui/material/styles/shadows';
 import { THEMES } from './types/enums.ts';
 import { darkPalette, lightPalette } from './palettes.ts';
 import typography from './typography.ts';
+import { configureEChartsTheme } from '@shared/theme/echarts';
 
 interface ThemeConfig {
   theme: THEMES;
@@ -294,6 +295,8 @@ export const createTheme = (config: ThemeConfig = { theme: THEMES.LIGHT }): Them
   if (config.responsiveFontSizes) {
     theme = responsiveFontSizes(theme);
   }
+
+  configureEChartsTheme(theme);
 
   return theme;
 };

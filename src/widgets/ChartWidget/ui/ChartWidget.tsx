@@ -1,26 +1,26 @@
 import { useState, MouseEvent, FC } from 'react';
 import { ToggleButton, ToggleButtonGroup, useTheme } from '@mui/material';
 
-import ChartWrapper from '@shared/ui';
 import { Chart } from '@shared/model';
 import { stringToUpperCase } from '@shared/utils';
 import { ChartType } from '@shared/types';
 import { getChartOptions } from '@widgets/ChartWidget/model/chartOptions';
 import { CHART_TYPES } from '@/shared/types/chartTypes';
+import ChartWrapper from '@shared/ui/ChartWrapper';
 
 type ChartWidgetProps = Chart;
 
 export const ChartWidget: FC<ChartWidgetProps> = ({ chartType, chartLabels, chartData }) => {
-  const [chartToggleType, setChartToggleType] = useState<ChartType>(chartType);
   const theme = useTheme();
+  const [chartToggleType, setChartToggleType] = useState<ChartType>(chartType);
+
+  const chartOptions = getChartOptions(chartToggleType, chartLabels, chartData, theme);
 
   const handleChartTypeChange = (_event: MouseEvent<HTMLElement>, newChartType: ChartType) => {
     if (newChartType !== null) {
       setChartToggleType(newChartType);
     }
   };
-
-  const chartOptions = getChartOptions(chartToggleType, chartLabels, chartData, theme);
 
   return (
     <>
