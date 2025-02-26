@@ -1,10 +1,11 @@
 import { FC } from 'react';
 import { CssBaseline, ThemeProvider } from '@mui/material';
 
-import HomePage from '@pages/home';
 import { createTheme, THEMES } from '@shared/theme/mui';
 import { useDarkMode } from '@shared/utils';
 import { MockChartsService } from '@shared/services';
+import HomePage from '@pages/home';
+import ThemeToggle from '@shared/ui/ThemeToggle';
 
 const createMuiTheme = (theme: THEMES) =>
   createTheme({
@@ -21,12 +22,13 @@ const createMuiTheme = (theme: THEMES) =>
 const chartsService = new MockChartsService();
 
 const App: FC = () => {
-  const { isDarkMode } = useDarkMode();
+  const { isDarkMode, toggleTheme } = useDarkMode();
   const theme = createMuiTheme(isDarkMode ? THEMES.DARK : THEMES.LIGHT);
 
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
+      <ThemeToggle isDarkMode={isDarkMode} toggleTheme={toggleTheme} />
 
       <HomePage chartsService={chartsService} />
     </ThemeProvider>
