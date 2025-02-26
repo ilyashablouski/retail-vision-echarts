@@ -1,8 +1,7 @@
 import { useState, MouseEvent, FC } from 'react';
-// import { ECBasicOption } from 'echarts/types/dist/shared';
+import { ToggleButton, ToggleButtonGroup, useTheme } from '@mui/material';
 
 import ChartWrapper from '@shared/ui';
-import { ToggleButton, ToggleButtonGroup } from '@mui/material';
 import { Chart } from '@shared/model';
 import { stringToUpperCase } from '@shared/utils';
 import { ChartType } from '@shared/types';
@@ -13,6 +12,7 @@ type ChartWidgetProps = Chart;
 
 export const ChartWidget: FC<ChartWidgetProps> = ({ chartType, chartLabels, chartData }) => {
   const [chartToggleType, setChartToggleType] = useState<ChartType>(chartType);
+  const theme = useTheme();
 
   const handleChartTypeChange = (_event: MouseEvent<HTMLElement>, newChartType: ChartType) => {
     if (newChartType !== null) {
@@ -20,7 +20,7 @@ export const ChartWidget: FC<ChartWidgetProps> = ({ chartType, chartLabels, char
     }
   };
 
-  const chartOptions = getChartOptions(chartToggleType, chartLabels, chartData);
+  const chartOptions = getChartOptions(chartToggleType, chartLabels, chartData, theme);
 
   return (
     <>

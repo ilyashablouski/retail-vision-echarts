@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { CssBaseline, ThemeProvider } from '@mui/material';
 
 import HomePage from '@pages/home';
-import { createTheme, THEMES } from '@shared/theme';
+import { createTheme, THEMES } from '@shared/theme/mui';
 import { useDarkMode } from '@shared/utils';
 import { MockChartsService } from '@shared/services';
 
