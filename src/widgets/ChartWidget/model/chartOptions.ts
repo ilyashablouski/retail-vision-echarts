@@ -52,12 +52,25 @@ export const getChartOptions = (
     case ChartType.Pie:
       return {
         title: { text: 'Pie Chart' },
+        tooltip: {
+          trigger: 'item',
+          formatter: '{b}: {c} ({d}%)',
+        },
         series: [
           {
             type: 'pie',
             data: chartLabels.map((label, index) => ({
               name: label,
               value: chartData[index],
+              label: {
+                show: true,
+                formatter: '{b}: {c} ({d}%)',
+                fontSize: 14,
+                color: theme.palette.text.primary,
+              },
+              emphasis: {
+                focus: 'self',
+              },
               itemStyle: {
                 color: generateColorPalette(theme)[index % generateColorPalette(theme).length],
               },
