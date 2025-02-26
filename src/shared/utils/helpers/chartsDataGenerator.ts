@@ -23,7 +23,9 @@ export const generateNormalDistributionData = (mean: number, stdDev: number, cou
     // Scaling the value to the desired mean and standard deviation
     const scaledValue = normalRandomValue * stdDev + mean;
 
-    data.push(scaledValue);
+    const roundedValue = parseFloat(scaledValue.toFixed(1));
+
+    data.push(roundedValue);
   }
 
   return data;
